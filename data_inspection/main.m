@@ -3,24 +3,24 @@ clc
 clear
 close all
 
-mdl_id   = 3;
-trial_id = 3;
+mdl_id   = 3; % picks the model to be tested
+trial_id = 3; % picks the trial to look at.
 
 mdl_list={'DrumShell','APPoisson','APNewton','mirtich','wang','whittaker'};
 fprintf('Looking at results from model %s on trial number %d \n',mdl_list{mdl_id},trial_id)
 
 % %%% visualize the energy ellipse and hypotheses
-% visualizeEnergyEllipse(mdl_list{mdl_id},trial_id)
+visualizeEnergyEllipse(mdl_list{mdl_id},trial_id)
 % 
 % %%% visualize the convexity of of the error in momentum
-% convexity_check(mdl_list{mdl_id},trial_id)
+convexity_check(mdl_list{mdl_id},trial_id)
 % 
 % %%% estimate optimal mu and epsilon based on minimizing contact point
 % %%% momentum error
-% with_text = 1;
-% [mu,e,~,~,~]=optimal_mu_e(mdl_list{mdl_id},trial_id, with_text);
+with_text = 1;
+[mu,e,~,~,~]=optimal_mu_e(mdl_list{mdl_id},trial_id, with_text);
 
-data_num = 50;
+data_num = 1;
 data_vec = zeros(data_num,4);
 with_text = 0;
 for i=1:data_num
