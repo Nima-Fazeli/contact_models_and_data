@@ -4,7 +4,7 @@ clear
 close all
 
 mdl_id   = 3; % picks the model to be tested
-trial_id = 3; % picks the trial to look at.
+trial_id = 2; % picks the trial to look at.
 
 mdl_list={'DrumShell','APPoisson','APNewton','mirtich','wang','whittaker'};
 fprintf('Looking at results from model %s on trial number %d \n',mdl_list{mdl_id},trial_id)
