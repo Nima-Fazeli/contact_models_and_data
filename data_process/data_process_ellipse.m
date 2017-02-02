@@ -1,28 +1,28 @@
 
 clc
-% clear
+clear
 close all
 
 addpath('../bag_files')
 
 withVis  = 0;
-withSave = 1;
+withSave = 0;
 second_missing = [];
 
-start_num = 469;
+start_num = 508;
 numData   = 2000;
 
-% bounce_array(1).states = zeros(1,12);
-% bounce_array(1).n = zeros(1,3);
-% bounce_array(1).d = zeros(1,3);
-% bounce_array(1).flag_sb = 0;
-% bounce_array(1).flag_en = 0;
-% bounce_array(1).flag_cl = 0;
-% bounce_array(1).flag_mc = 0;
-% bounce_array(1).flag_de = 0;
-% bounce_array(1).flag_ld = 0;
-% bounce_array(1).flags = [0,0,0,0,0,0];
-% clean_data = 0;
+bounce_array(1).states = zeros(1,12);
+bounce_array(1).n = zeros(1,3);
+bounce_array(1).d = zeros(1,3);
+bounce_array(1).flag_sb = 0;
+bounce_array(1).flag_en = 0;
+bounce_array(1).flag_cl = 0;
+bounce_array(1).flag_mc = 0;
+bounce_array(1).flag_de = 0;
+bounce_array(1).flag_ld = 0;
+bounce_array(1).flags = [0,0,0,0,0,0];
+clean_data = 0;
 
 for count = start_num:numData
     close all
@@ -191,6 +191,22 @@ for count = start_num:numData
     end
     
     bounce_ind = find(acc_norm>200);
+    if isempty(bounce_ind)
+        bounce_ind = find(acc_norm>150);
+        if isempty(bounce_ind)
+            bounce_array(count).states = drop_states;
+            bounce_array(count).n = n_for_storage';
+            bounce_array(count).d = d_for_storage';
+            bounce_array(count).flag_sb = 1;
+            bounce_array(count).flag_en = 1;
+            bounce_array(count).flag_cl = 1;
+            bounce_array(count).flag_mc = 1;
+            bounce_array(count).flag_de = 1;
+            bounce_array(count).flag_ld = 1;
+            bounce_array(count).flags = [1,1,1,1,1,1];
+            continue
+        end
+    end
     bounce_ind = bounce_ind+1;
     
     if (bounce_ind(1)-18)>1
@@ -338,6 +354,7 @@ for count = start_num:numData
     fprintf('\n Looking at trial number %d: \n',count)
     
     fb = bounce_ind(1);
+    sb =[];
     
     if length(bounce_ind)<2
         fprintf('WARNING: I have detected 1 impact!!! \n')
