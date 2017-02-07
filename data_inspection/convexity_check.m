@@ -1,4 +1,4 @@
-function [  ] = convexity_check( model_str, trial )
+function [ mu_e_init ] = convexity_check( model_str, trial, with_vis )
 
 addpath('/Users/nimafazeli/Documents/MATLAB/2017 01 - Learning Contact New Data/models')
 addpath('/Users/nimafazeli/Documents/MATLAB/2017 01 - Learning Contact New Data/data')
@@ -35,7 +35,7 @@ vpost = M*(J*vm);
 
 
 e_range  = linspace(0.40,0.9,20);
-mu_range = linspace(0.01,0.4,20);
+mu_range = linspace(0.01,0.3,20);
 [E,Mu] = meshgrid(e_range,mu_range);
 norm_error = zeros(size(E,1),size(E,2));
 
@@ -53,16 +53,23 @@ for ii=1:size(E,1)
     end
 end
 
-figure
-surf(E,Mu,norm_error)
-xlabel 'Epsilon' 
-ylabel 'Mu' 
-zlabel '2 Norm Error'
+if with_vis
+    figure
+    surf(E,Mu,norm_error)
+    xlabel 'Epsilon'
+    ylabel 'Mu'
+    zlabel '2 Norm Error'
+    
+    figure
+    hold on
+    plot(p_list(1,:),p_list(2,:),'ob')
+    plot(Pt(1),Pt(2),'or')
+end
 
-figure
-hold on
-plot(p_list(1,:),p_list(2,:),'ob')
-plot(Pt(1),Pt(2),'or')
+[~,I]=min(norm_error(:));
+[I_row, I_col] = ind2sub(size(norm_error),I);
+
+mu_e_init = [Mu(I_col,1),E(1,I_col)];
 
 % vec_test = sqrt(sum((p_list-Pt).^2,1));
 % figure

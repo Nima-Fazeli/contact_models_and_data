@@ -5,12 +5,12 @@ close all
 
 addpath('../bag_files')
 
-withVis  = 0;
+withVis  = 1;
 withSave = 0;
 second_missing = [];
 
-start_num = 508;
-numData   = 2000;
+start_num = 3;
+numData   = 3;
 
 bounce_array(1).states = zeros(1,12);
 bounce_array(1).n = zeros(1,3);
@@ -416,6 +416,37 @@ for count = start_num:numData
     pimpx = [icx(1)*(-2/250)+icx(2);icx(1)];
     pimpt = [ict(1)*(-2/250)+ict(2);ict(1)];
     
+        
+    if withVis
+        %%% plot pre and post impact velocities in y
+        figure
+        subplot(211)
+        hold on
+        plot(p(:,3))
+        plot(bounce_ind(1),impy(1),'ob')
+        plot(ind_para_a,pimpy(1),'or')
+        grid on
+        subplot(212)
+        hold on
+        plot(diff(p(:,3))*fs)
+        plot(bounce_ind(1)-1,impy(2),'ob')
+        plot(ind_para_a,pimpy(2),'or')
+        grid on
+        %%% plot pre and post impact velocities in x
+        figure
+        subplot(211)
+        hold on
+        plot(p(:,2))
+        plot(bounce_ind(1),impx(1),'ob')
+        plot(ind_para_a,pimpx(1),'or')
+        grid on
+        subplot(212)
+        hold on
+        plot(diff(p(:,2))*fs)
+        plot(bounce_ind(1)-1,impx(2),'ob')
+        plot(ind_para_a,pimpx(2),'or')
+        grid on
+    end
     
     %%% data formating
     drop_states = [impx(1),impy(1),impt(1),impx(2),impy(2),impt(2),...
