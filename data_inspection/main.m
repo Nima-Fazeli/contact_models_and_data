@@ -53,9 +53,9 @@ ylabel 'Coeff of Restitution'
 figure
 subplot(211)
 plot(-data_vec(ind_to_plot,5),data_vec(ind_to_plot,1),'o')
-xlabel 'Linear Momentum X'
+xlabel 'Change in Linear Momentum X'
 ylabel 'Coeff of Friction'
 subplot(212)
 plot(-data_vec(ind_to_plot,6),data_vec(ind_to_plot,2),'o')
-xlabel 'Linear Momentum Y'
+xlabel 'Change in Linear Momentum Y'
 ylabel 'Coeff of Restitution'
