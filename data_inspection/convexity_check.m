@@ -20,17 +20,21 @@ n = bounce_array(trial).n;
 h = 1/250;
 ha = h*[0;-g;0];
 
+%%% measured post contact velocity - Center of Mass of the object
 vm = bounce_array(trial).states(10:12)';
-
 
 J = [d;n];
 Minv = J*(Mass\J');
 M    = inv(Minv);
 
+%%% the radius and tilt of the energy-change in momentum curve
 rad = (J*v)'*M*(J*v);
 MVI = M*(J*v);
 
+%%% change in momentum of the contact point pre and post impact
 Pt = M*((J*vm)-(J*v));
+
+%%% measured post contact momentum of the contact point
 vpost = M*(J*vm);
 
 
