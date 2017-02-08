@@ -1,0 +1,9 @@
+function [ output_args ] = visualizePreImpVel(  )
+
+close all
+addpath('/Users/nimafazeli/Documents/MATLAB/2017 01 - Learning Contact New Data/models')
+addpath('/Users/nimafazeli/Documents/MATLAB/2017 01 - Learning Contact New Data/data')
+load('ellipse_uniform')
+
+end
+
